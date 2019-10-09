@@ -9,12 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 
     private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
 
     private final JdbcTemplate jdbcTemplate;
+
+    public Date date;
 
     @Autowired
     public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
@@ -26,11 +32,28 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
             log.info("!!! JOB FINISHED! Time to verify the results");
 
-            jdbcTemplate.query("SELECT first_name, last_name FROM people",
-                    (rs, row) -> new Person(
-                            rs.getString(1),
-                            rs.getString(2))
+                jdbcTemplate.query("SELECT first_name, last_name FROM people",
+                        (rs, row) -> {
+                            return new Person(
+                                        rs.getString(1),
+                                        rs.getString(2)
+                            );
+                        }
+                ).forEach(person -> log.info("Found <" + person + "> in the database."));
+
+            /*jdbcTemplate.query("SELECT first_name, last_name FROM people",
+                    (rs, row) -> {
+                        return new Person(
+                                rs.getString(1),
+                                rs.getString(2),
+                                new SimpleDateFormat("dd/MMyyy").parse(rs.getString(3)),
+                                rs.getString(4),
+                                rs.getDouble(5)
+                        );
+                    }
             ).forEach(person -> log.info("Found <" + person + "> in the database."));
+
+             */
         }
     }
 }

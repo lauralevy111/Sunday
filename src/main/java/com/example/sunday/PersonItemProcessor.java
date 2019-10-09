@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.batch.item.ItemProcessor;
 
+import java.util.Date;
+
 public class PersonItemProcessor implements ItemProcessor<Person, Person> {
 
     private static final Logger log = LoggerFactory.getLogger(PersonItemProcessor.class);
@@ -14,7 +16,14 @@ public class PersonItemProcessor implements ItemProcessor<Person, Person> {
         final String firstName = person.getFirstName().toUpperCase();
         final String lastName = person.getLastName().toUpperCase();
 
-        final Person transformedPerson = new Person(firstName, lastName);
+        /*
+        final Date date = person.getBirthDate();
+        final String address = person.getAddress().toUpperCase();
+        final Double accountBalance = person.getAccountBalance();
+
+         */
+
+        final Person transformedPerson = new Person(firstName, lastName/*, date, address, accountBalance*/);
 
         log.info("Converting (" + person + ") into (" + transformedPerson + ")");
 
