@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 
 @Configuration
 @EnableBatchProcessing
@@ -28,6 +29,9 @@ public class BatchConfiguration {
 
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
+
+    @Autowired
+    public DataSource dataSource;
 
     @Bean
     public FlatFileItemReader<Person> reader() {
@@ -57,13 +61,13 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Job importUserJob(JobCompletionNotificationListener listener, Step step1, Step step2) {
+    public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
         return jobBuilderFactory.get("importUserJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
-                .flow(step1)
-                .next(step2)
-                .end()
+                .start(step1(writer(dataSource)))
+                .next(step2(writer(dataSource)))
+               //.end()
                 .build();
     }
 
