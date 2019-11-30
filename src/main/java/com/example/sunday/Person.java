@@ -15,9 +15,10 @@ public class Person {
     public double accountBalance=0;
 
 
-    public Person (String firstName, String lastName/*, Date birthDate, String address, double initialBalance*/){
+    public Person (String firstName, String lastName, double accountBalance/*, Date birthDate, String address, double initialBalance*/){
         this.firstName=firstName;
         this.lastName=lastName;
+        this.accountBalance=accountBalance;
 
         /*this.birthDate=birthDate;
         this.address=address;
@@ -32,6 +33,7 @@ public class Person {
     public String getLastName() {
         return lastName;
     }
+    public double getAccountBalance() { return accountBalance; }
 
     /*
 

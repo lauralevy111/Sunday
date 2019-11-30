@@ -15,6 +15,7 @@ public class PersonItemProcessor implements ItemProcessor<Person, Person> {
     public Person process(final Person person) throws Exception {
         final String firstName = person.getFirstName().toUpperCase();
         final String lastName = person.getLastName().toUpperCase();
+        final double accountBalance = person.getAccountBalance();
 
         /*
         final Date date = person.getBirthDate();
@@ -23,7 +24,7 @@ public class PersonItemProcessor implements ItemProcessor<Person, Person> {
 
          */
 
-        final Person transformedPerson = new Person(firstName, lastName/*, date, address, accountBalance*/);
+        final Person transformedPerson = new Person(firstName, lastName, accountBalance/*, date, address, accountBalance*/);
 
         log.info("Converting (" + person + ") into (" + transformedPerson + ")");
 
