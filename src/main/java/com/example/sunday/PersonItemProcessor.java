@@ -17,14 +17,14 @@ public class PersonItemProcessor implements ItemProcessor<Person, Person> {
         final String lastName = person.getLastName().toUpperCase();
         final double accountBalance = person.getAccountBalance();
 
-        /*
+
         final Date date = person.getBirthDate();
         final String address = person.getAddress().toUpperCase();
-        final Double accountBalance = person.getAccountBalance();
+        //final Double accountBalance = person.getAccountBalance();
 
-         */
 
-        final Person transformedPerson = new Person(firstName, lastName, accountBalance/*, date, address, accountBalance*/);
+
+        final Person transformedPerson = new Person(firstName, lastName, accountBalance, date, address, accountBalance);
 
         log.info("Converting (" + person + ") into (" + transformedPerson + ")");
 
