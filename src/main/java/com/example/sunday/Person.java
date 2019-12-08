@@ -7,10 +7,8 @@ public class Person {
     public String firstName;
     public String lastName;
 
-
     public Date birthDate;
     public String address;
-
 
     public double accountBalance=0;
 
@@ -23,7 +21,6 @@ public class Person {
         this.birthDate=birthDate;
         this.address=address;
         accountBalance+=initialBalance;
-
 
     }
 
@@ -56,7 +53,6 @@ public class Person {
     public void returnPurchase(double price){
         accountBalance+=price;
     }
-
 
     @Override
     public String toString(){

@@ -37,9 +37,10 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
                             return new Person(
                                         rs.getString(1),
                                         rs.getString(2),
-                                        rs.getString(3),
-                                        rs.getString(4),
-                                        rs.getString(5)
+                                        rs.getDouble(3),
+                                        rs.getDate(4),
+                                        rs.getString(5),
+                                        rs.getDouble(6)
                             );
                         }
                 ).forEach(person -> log.info("Found <" + person + "> in the database."));
