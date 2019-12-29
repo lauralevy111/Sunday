@@ -6,7 +6,7 @@ public class Book {
     public double price;
     public String description;
 
-    public int inventory = 0;
+    public int inventory;
 
     public Book(String name, double price, String description, int initialInventory){
         this.name=name;
